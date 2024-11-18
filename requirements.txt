@@ -1,0 +1,6 @@
+Django==4.2.5  # Версия Django, используемая для основного бэкенда
+djangorestframework==3.14.0  # DRF для API
+djangorestframework-simplejwt==5.2.0  # JWT аутентификация
+djoser==2.1.0  # Djoser для управления пользователями
+Pillow==10.0.0  # Работа с изображениями, используется для аватаров
+django-cors-headers==3.14.0
