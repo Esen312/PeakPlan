@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "./Header.css"; // Подключаем стили
 
 function Header() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Проверка текущего пользователя
+    // Проверяем текущего пользователя
     const token = localStorage.getItem("access");
     if (token) {
       axios
@@ -32,82 +33,65 @@ function Header() {
           localStorage.removeItem("refresh");
           setUser(null);
         })
-        .catch((err) => console.error("Logout failed:", err));
+        .catch((err) => console.error("Ошибка выхода из системы:", err));
     }
   };
 
   return (
-    <header style={{ background: "#333", padding: "10px", color: "#fff" }}>
-      <nav
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <h1 style={{ margin: 0 }}>
-          <Link to="/" style={{ color: "#fff", textDecoration: "none" }}>
+    <header className="header">
+      <nav className="nav">
+        <h1 className="logo">
+          <Link to="/" className="logo-link">
             Workout Planner
           </Link>
         </h1>
-        <ul
-          style={{
-            listStyle: "none",
-            display: "flex",
-            margin: 0,
-            padding: 0,
-          }}
-        >
-          <li style={{ marginRight: "20px" }}>
-            <Link to="/auth/token/login" style={{ color: "#fff", textDecoration: "none" }}>
-              Login
+        <ul className="nav-links">
+          <li>
+            <Link to="/auth/token/login" className="nav-link">
+              Вход
             </Link>
           </li>
-          <li style={{ marginRight: "20px" }}>
-            <Link to="/auth/users" style={{ color: "#fff", textDecoration: "none" }}>
-              Register
+          <li>
+            <Link to="/auth/users" className="nav-link">
+              Регистрация
             </Link>
           </li>
-          <li style={{ marginRight: "20px" }}>
-            <Link to="/auth/users/me" style={{ color: "#fff", textDecoration: "none" }}>
-              Profile
+          <li>
+            <Link to="/auth/users/me" className="nav-link">
+              Профиль
             </Link>
           </li>
-          <li style={{ marginRight: "20px" }}>
-            <Link to="/dashboard" style={{ color: "#fff", textDecoration: "none" }}>
-              Dashboard
+          <li>
+            <Link to="/dashboard" className="nav-link">
+              Панель управления
+            </Link>
+          </li>
+          <li>
+            <Link to="/calendar" className="nav-link">
+              Календарь
+            </Link>
+          </li>
+          <li>
+            <Link to="/manage-workouts" className="nav-link">
+              Управление тренировками
             </Link>
           </li>
           {user && (
             <li>
-              <button
-                onClick={handleLogout}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  color: "#fff",
-                  cursor: "pointer",
-                  textDecoration: "underline",
-                }}
-              >
-                Logout
+              <button onClick={handleLogout} className="logout-button">
+                Выход
               </button>
             </li>
           )}
         </ul>
         {user && (
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div className="user-info">
             <img
               src={user.avatar || "https://via.placeholder.com/40"} // Заглушка для аватара
               alt="Avatar"
-              style={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                marginRight: "10px",
-              }}
+              className="user-avatar"
             />
-            <span>{user.username}</span>
+            <span className="user-username">{user.username}</span>
           </div>
         )}
       </nav>

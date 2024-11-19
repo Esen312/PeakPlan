@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Login.css";
 
 function Login() {
   const [usernameOrEmail, setUsernameOrEmail] = useState(""); // Поддерживаем email или username
@@ -21,16 +22,16 @@ function Login() {
         localStorage.setItem("refresh", response.data.refresh);
         navigate("/dashboard"); // Перенаправляем на дашборд
       })
-      .catch(() => setError("Invalid username/email or password"));
+      .catch(() => setError("Неверное имя пользователя/email или пароль"));
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Login</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h2>С возвращением! 👋Вход</h2>
+        {error && <p className="login-error">{error}</p>}
         <div>
-          <label>Username or Email:</label>
+          <label>Имя пользователя или Email:</label>
           <input
             type="text"
             value={usernameOrEmail}
@@ -39,7 +40,7 @@ function Login() {
           />
         </div>
         <div>
-          <label>Password:</label>
+          <label>Пароль:</label>
           <input
             type="password"
             value={password}
@@ -47,7 +48,7 @@ function Login() {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Войти</button>
       </form>
     </div>
   );

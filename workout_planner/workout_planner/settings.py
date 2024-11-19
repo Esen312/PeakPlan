@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bishkek'
 
 USE_I18N = True
 
@@ -150,6 +150,8 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+
+
 AUTHENTICATION_BACKENDS = [
     'users.auth_backend.EmailOrUsernameBackend',  # Новый backend
     'django.contrib.auth.backends.ModelBackend',  # Стандартный backend
@@ -169,3 +171,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,                  # Ротация токенов обновления при каждом запросе
     'BLACKLIST_AFTER_ROTATION': True,               # Черный список старых токенов
 }
+
+
+
+

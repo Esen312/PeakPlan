@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* App.css */
+
+/* Общий контейнер приложения */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(120deg, #1b1b2f, #252546);
+  color: #f0f0f0;
+}
+
+/* Основной контент */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
