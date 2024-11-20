@@ -86,12 +86,9 @@ function Header() {
         </ul>
         {user && (
           <div className="user-info">
-            <img
-              src={user.avatar || "https://via.placeholder.com/40"} // Заглушка для аватара
-              alt="Avatar"
-              className="user-avatar"
-            />
-            <span className="user-username">{user.username}</span>
+            <Link to="/auth/users/me" className="user-profile-link">
+              <span className="user-username">{user.username}</span>
+            </Link>
           </div>
         )}
       </nav>

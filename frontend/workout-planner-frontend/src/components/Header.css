@@ -84,6 +84,18 @@
   gap: 10px;
 }
 
+.user-profile-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.user-profile-link:hover {
+  color: #28a745;
+}
+
+
 .user-avatar {
   width: 40px;
   height: 40px;

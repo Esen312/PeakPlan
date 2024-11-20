@@ -11,3 +11,4 @@ urlpatterns = [
     path("", include(router.urls)),
     path("today-workouts/", TodayWorkoutsView.as_view(), name="today-workouts"),
 ]
+
