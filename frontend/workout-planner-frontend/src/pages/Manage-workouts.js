@@ -6,11 +6,13 @@ function ManageWorkouts() {
   const [workouts, setWorkouts] = useState([]);
   const [editingWorkout, setEditingWorkout] = useState(null);
   const [editDetails, setEditDetails] = useState({
+    workout: "",
+    date: "",
+    time: "",
     sets: "",
     reps: "",
     duration: "",
     additional_weight: "",
-    time: "",
   });
 
   useEffect(() => {
@@ -46,11 +48,13 @@ function ManageWorkouts() {
   const handleEdit = (workout) => {
     setEditingWorkout(workout.id);
     setEditDetails({
+      workout: workout.workout, // ID тренировки
+      date: workout.date,
+      time: workout.time,
       sets: workout.sets,
       reps: workout.reps,
       duration: workout.duration,
       additional_weight: workout.additional_weight || "",
-      time: workout.time,
     });
   };
 
@@ -78,7 +82,10 @@ function ManageWorkouts() {
           setEditingWorkout(null);
         })
         .catch((error) =>
-          console.error("Не удалось обновить тренировку:", error)
+          console.error(
+            "Не удалось обновить тренировку:",
+            error.response?.data || error
+          )
         );
     }
   };
@@ -116,9 +123,7 @@ function ManageWorkouts() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor={`duration-${workout.id}`}>
-                    Длительность (минуты):
-                  </label>
+                  <label htmlFor={`duration-${workout.id}`}>Длительность:</label>
                   <input
                     type="number"
                     id={`duration-${workout.id}`}
@@ -131,7 +136,7 @@ function ManageWorkouts() {
                 </div>
                 <div className="form-group">
                   <label htmlFor={`additional-weight-${workout.id}`}>
-                    Дополнительный вес (кг):
+                    Доп. вес:
                   </label>
                   <input
                     type="number"
@@ -139,6 +144,18 @@ function ManageWorkouts() {
                     name="additional_weight"
                     value={editDetails.additional_weight}
                     onChange={handleEditChange}
+                    className="form-input"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor={`date-${workout.id}`}>Дата:</label>
+                  <input
+                    type="date"
+                    id={`date-${workout.id}`}
+                    name="date"
+                    value={editDetails.date}
+                    onChange={handleEditChange}
+                    required
                     className="form-input"
                   />
                 </div>

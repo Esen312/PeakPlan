@@ -65,80 +65,84 @@ function Dashboard() {
     ],
   };
 
-  return (
-    <div className="dashboard-container">
-      <h2 className="dashboard-title">Добро пожаловать на Панель управления</h2>
-      <div className="dashboard-summary">
-        <div className="summary-card">
-          <h3>Сегодняшние тренировки</h3>
-          <p>{workouts.length}</p>
-        </div>
-        <div className="summary-card">
-          <h3>Общая длительность</h3>
-          <p>{workouts.reduce((total, w) => total + w.duration, 0)} минут</p>
-        </div>
+return (
+  <div className="dashboard-container">
+    <h2 className="dashboard-title">Добро пожаловать на Панель управления ️</h2>
+    <div className="dashboard-workouts">
+      <div className="workout-card no-workouts-card">
+        <h3 className="workout-name">Тренировки на сегодня</h3>
       </div>
-      <div className="dashboard-chart">
-        <h3>Статистика тренировок</h3>
-        <Line key={Math.random()} data={chartData} />
+      {workouts.length > 0 ? (
+        <div className="workout-list">
+          {workouts.map((workout) => (
+            <div key={workout.id} className="workout-card">
+              <h4 className="workout-name">{workout.workout_name}</h4>
+              <p className="workout-description">
+                {workout.description || "Описание отсутствует"}
+              </p>
+              <ul className="workout-details">
+                <li>
+                  <i className="workout-icon">📅</i>
+                  <span>
+                    <strong>Дата:</strong> {workout.date}
+                  </span>
+                </li>
+                <li>
+                  <i className="workout-icon">⏰</i>
+                  <span>
+                    <strong>Время:</strong> {workout.time}
+                  </span>
+                </li>
+                <li>
+                  <i className="workout-icon">🌀</i>
+                  <span>
+                    <strong>Подходы:</strong> {workout.sets}
+                  </span>
+                </li>
+                <li>
+                  <i className="workout-icon">🔁</i>
+                  <span>
+                    <strong>Повторы:</strong> {workout.reps}
+                  </span>
+                </li>
+                <li>
+                  <i className="workout-icon">⏳</i>
+                  <span>
+                    <strong>Длительность:</strong> {workout.duration} минут
+                  </span>
+                </li>
+                <li>
+                  <i className="workout-icon">🏋️</i>
+                  <span>
+                    <strong>Доп. вес:</strong> {workout.additional_weight || "Нет"} кг
+                  </span>
+                </li>
+              </ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="workout-card no-workouts-card">
+          <p className="workout-description">На сегодня тренировки не запланированы. </p>
+        </div>
+      )}
+    </div>
+    <div className="dashboard-summary">
+      <div className="summary-card">
+        <h3>Сегодняшние тренировки</h3>
+        <p>{workouts.length}</p>
       </div>
-      <div className="dashboard-workouts">
-        <h3>Тренировки на сегодня</h3>
-        {workouts.length > 0 ? (
-          <div className="workout-list">
-            {workouts.map((workout) => (
-              <div key={workout.id} className="workout-card">
-                <h4 className="workout-name">{workout.workout_name}</h4>
-                <p className="workout-description">
-                  {workout.description || "Описание отсутствует"}
-                </p>
-                <ul className="workout-details">
-                  <li>
-                    <i className="workout-icon">📅</i>
-                    <span>
-                      <strong>Дата:</strong> {workout.date}
-                    </span>
-                  </li>
-                  <li>
-                    <i className="workout-icon">⏰</i>
-                    <span>
-                      <strong>Время:</strong> {workout.time}
-                    </span>
-                  </li>
-                  <li>
-                    <i className="workout-icon">🌀</i>
-                    <span>
-                      <strong>Подходы:</strong> {workout.sets}
-                    </span>
-                  </li>
-                  <li>
-                    <i className="workout-icon">🔁</i>
-                    <span>
-                      <strong>Повторы:</strong> {workout.reps}
-                    </span>
-                  </li>
-                  <li>
-                    <i className="workout-icon">⏳</i>
-                    <span>
-                      <strong>Длительность:</strong> {workout.duration} минут
-                    </span>
-                  </li>
-                  <li>
-                    <i className="workout-icon">🏋️</i>
-                    <span>
-                      <strong>Доп. вес:</strong> {workout.additional_weight || "Нет"} кг
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>На сегодня тренировки не запланированы.</p>
-        )}
+      <div className="summary-card">
+        <h3>Общая длительность</h3>
+        <p>{workouts.reduce((total, w) => total + w.duration, 0)} минут</p>
       </div>
     </div>
-  );
+    <div className="dashboard-chart">
+      <h3>Статистика тренировок</h3>
+      <Line key={Math.random()} data={chartData} />
+    </div>
+  </div>
+);
 }
 
 export default Dashboard;
