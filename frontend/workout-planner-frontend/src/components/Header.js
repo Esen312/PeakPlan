@@ -46,42 +46,47 @@ function Header() {
           </Link>
         </h1>
         <ul className="nav-links">
-          <li>
-            <Link to="/auth/token/login" className="nav-link">
-              Вход
-            </Link>
-          </li>
-          <li>
-            <Link to="/auth/users" className="nav-link">
-              Регистрация
-            </Link>
-          </li>
-          <li>
-            <Link to="/auth/users/me" className="nav-link">
-              Профиль
-            </Link>
-          </li>
-          <li>
-            <Link to="/dashboard" className="nav-link">
-              Панель управления
-            </Link>
-          </li>
-          <li>
-            <Link to="/calendar" className="nav-link">
-              Календарь
-            </Link>
-          </li>
-          <li>
-            <Link to="/manage-workouts" className="nav-link">
-              Управление тренировками
-            </Link>
-          </li>
-          {user && (
-            <li>
-              <button onClick={handleLogout} className="logout-button">
-                Выход
-              </button>
-            </li>
+          {!user ? (
+            <>
+              <li>
+                <Link to="/auth/token/login" className="nav-link">
+                  Вход
+                </Link>
+              </li>
+              <li>
+                <Link to="/auth/users" className="nav-link">
+                  Регистрация
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+               <Link to="/dashboard" className="nav-link">
+                  Панель управления
+                </Link>
+              </li>
+              <li>
+                <Link to="/calendar" className="nav-link">
+                  Создать тренировку
+                </Link>
+              </li>
+              <li>
+                <Link to="/manage-workouts" className="nav-link">
+                  Управление тренировками
+                </Link>
+              </li>
+              <li>
+                 <Link to="/auth/users/me" className="nav-link">
+                  Профиль
+                </Link>
+              </li>
+              <li>
+                <button onClick={handleLogout} className="logout-button">
+                  Выход
+                </button>
+              </li>
+            </>
           )}
         </ul>
         {user && (
